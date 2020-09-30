@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cmath>
-#include <iomanip>
-// #define LIMITACION 5
+#include <iomanip> //setpresicion
+#define LIMITACION 6
 
 using namespace std;
 
@@ -11,8 +11,7 @@ using namespace std;
  **======================================================*/
 
 double f(double x );
-double biseccion(double xi, double xu, double tol, double imax);
-double funcion;
+double biseccion(double xi, double xu, double tol, int imax);
 int main(){
     /** Paso nuemro 1:
      *  Conocer las dos varibles de entrada del intervado cerrado
@@ -30,24 +29,30 @@ int main(){
     cout<<"\n\tFuncion: cos(x)-x\n\tValores Iniciales:[0,1.57080]\n\tCon cinco Interaciones\n";
     cout<<"\nDigita los valores iniaciales\n\n";
 
-    cout<<"Valor de [\e[44mXi\e[0m, \e[41mXu\e[0m ]:";      cin>>xi>>xu;
+    cout<<"Valor de [\e[44mXi\e[0m, \e[101mXu\e[0m ]:";      cin>>xi>>xu;
     cout<<"\n";
-    cout<<"Tolerancia: ";                                   cin>>tol;
-    cout<<"Cuantas iteraciones: ";                          cin>>imax;
+    cout<<"Tolerancia: ";                                    cin>>tol;
+    cout<<"Cuantas iteraciones: ";                           cin>>imax;
     
     raiz = biseccion(xi,xu,tol,imax);
-    cout<<"La raiz es: "<<raiz<<endl;    
+    cout<<"La raiz es: \e[105m"<<raiz<<"\e[0m"<<endl;    
     
     return 0;
 }
 
-double biseccion(double xi, double xu, double tol, double imax){
+
+double f(double x ){  
+    return cos(x)-x;
+}
+
+double biseccion(double xi, double xu, double tol, int imax){
     double xr;
     int iter=0;
-    cout<<"\e[96m| it\t| Xi\t\t| Xu\t\t| Xr\t\t| f(Xi)\t\t| f(Xr)\t\t| f(Xi) * f(Xr)\t\t| Error\n\e[0m";
-    cout<<"|--------------------------------------------------------------------------------------------------------------------------------------|\n";
-    
+
+    cout<<"| it\t| Xi\t\t| Xu\t\t|    Xr\t\t| f(Xi)\t\t| f(Xr)\t\t| Error\n";
+    cout<<"|------------------------------------------------------------------------------------------------------|\n";
     do{ 
+
        xr = (xi + xu)/2;
        if(f(xi) * f(xr)<0){
            xu = xr;
@@ -55,13 +60,9 @@ double biseccion(double xi, double xu, double tol, double imax){
            xi= xr;
        }
 
-        cout<<"\t| "<<iter<<"\t| "<<xi<<"\t\t| "<<xu<<"\t\t| "<<xr<<"\t\t| "<<f(xi)<<"\t\t| "<<f(xr)<<endl; 
+        cout<<setprecision(LIMITACION)<<"|  "<<iter<<"\t| "<<xi<<"\t| "<<xu<<"\t| "<<xr<<"\t| "<<f(xi)<<"\t\t| "<<f(xr)<<endl; 
         iter++;
+
     }while ((abs(f(xr))>tol) && (iter < imax));
     return xr;   
-}
-
-double f(double x ){
-	    funcion=cos(x)-x;
-    return  funcion;
 }
