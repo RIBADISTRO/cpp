@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
+#define PRESICION 10
 using namespace std;
 
 double funcion(double fx);
@@ -17,33 +19,30 @@ int main(){
     cout<<"\tMaxima iteracion: ";                         cin>>maxIteracion;
     puntoFijo(Xo, tolerancia, maxIteracion);
     return 0;
-}
+}   
 
 double puntoFijo(double Xo, double tolerancia, int maxIteracion){
-    double Xn, error, fx, gx,fg;
+    double Xn, error=1, fx, gx,aux,a;
     int iter=0;
-    cout<<"| Iteracion\t| xi\t| g(x)\t| f(x)\t| Err"<<endl;
-    cout<<"----------------------------------------------"<<endl;
-    do{
-      Xn = g(Xo);
-      
-      cout<<"| "<<iter<<endl;
-      if(iter == 1){
-        error = 1;
-      }else{
-        error = abs((Xn-Xo)/Xn);
-      }
-      fx =funcion(Xo);
-      gx =g(Xo);
-      /* Imprmir  */
-      Xn = Xo;
-      x = fg;
-      if(fx * x < 0){//comparaci�n de signos
-        a=x;//toma el dato de c para b
-      }
-      iter++;
-    }while (g(Xo) != 0 && error > tolerancia && (iter < maxIteracion));
-    // return gx;
+    cout<<"| Iter      |    xi\t | g(x) \t    |   f(x)\t| Err"<<endl;
+    cout<<"---------------------------------------------------------------"<<endl;
+    while(iter <= maxIteracion){
+          if (iter == 0){
+              error = 1;
+          }else{
+              error = fabs((Xo - aux)/Xo);
+          }
+          fx = funcion(Xo);
+          gx = g(Xo);
+          cout<<"| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xo<<" | "<<setw(PRESICION)<<gx<<" | "<<setw(PRESICION)<<fx<<" | "<<setw(PRESICION)<<error<<endl;
+          aux = Xo;
+          Xo=gx;
+
+          if(fx * Xo < 0){
+            a=Xo;
+          }
+          iter++;
+       }
 }
 
 double g(double x){

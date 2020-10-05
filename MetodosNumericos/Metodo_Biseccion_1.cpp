@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-// #define PRESICION 6
+#define PRESICION 6
 using namespace std;
 
 double f(double x);
@@ -24,9 +24,10 @@ int main(){
  double biseccion( double a,  double b, double tolerancia, int maxIteracion){
      double xr,xAntiguo,error;
      int iter=0;
+
     /* IMPRIMIR EL ENCABEZADO */
     cout<<"| it\t| A\t\t| B\t\t|    Xr\t\t| f(A)\t\t| f(B)\t\t| f(Xr)\t\t| Error\n";
-    cout<<"|------------------------------------------------------------------------------------------------------|\n";
+    cout<<"|-------------------------------------------------------------------------------------------------------|\n";
 
      do{    
         xAntiguo =xr;
@@ -34,7 +35,7 @@ int main(){
         error = fabs(double(xr-xAntiguo)/(xr)*100);
 
          /* IMPRIMIR LOS VALORES CALCULADOS  */
-         cout<<"|  "<<iter<<"\t| "<< a <<"\t| "<< b <<"\t| \e[95m"<< xr <<"\e[0m\t| "<< f(a) <<"\t| "<< f(b) <<"\t| "<< f(xr) <<"\t| "<<error<<endl; 
+         cout<<"|  "<<iter<<"\t| "<<setw(PRESICION)<< a <<"\t| "<<setw(PRESICION)<< b <<"\t| \e[95m"<<setw(PRESICION)<< xr <<"\e[0m\t| "<<setw(PRESICION)<< f(a) <<"\t| "<<setw(PRESICION)<< f(b) <<"\t| "<<setw(PRESICION)<< f(xr) <<"\t| "<<setw(PRESICION)<<error<<endl; 
         /* CONDICION  */
         if(abs(f(xr)) <= tolerancia){
             cout<<"\n\nPara la tolerancia \e[34m"<< tolerancia <<"\e[0m la raiz de f es: \e[93m"<< xr <<"\e[0m"<<endl;
@@ -53,7 +54,7 @@ int main(){
 
 }
 /**FUNCION 
- * Aqui se pueda replazar la funcion por otra
+ * Aqui se pueda reeplazar la funcion por otra
  */
 double f(double x){
     return cos(x)-x;
