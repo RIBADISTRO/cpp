@@ -25,10 +25,10 @@ int main(){
 }
 
 void newton_raphson(double Xo, double tolerancia, int maxIteracion){
-   double x1, error;    // Diferencia entre dos aproximaciones sucesivas: x1 - x0
+   double x1, error, fx,dfx, aux;    // Diferencia entre dos aproximaciones sucesivas: x1 - x0
    int Iter = 1; // # de iteraciones
    bool converge = true;
-   cout<<"| Iter      |    Xo\t | f(x) \t    |   f'(x)\t| Err"<<endl;
+   cout<<"\n| Iter  |    Xo\t     | f(x) \t  |  f'(x)\t| f(x)/f'(x) | Err"<<endl;
    cout<<"---------------------------------------------------------------"<<endl;    
    do {    
       if (Iter > maxIteracion){
@@ -36,8 +36,11 @@ void newton_raphson(double Xo, double tolerancia, int maxIteracion){
          break;
       }else{
          x1 = Xo - f(Xo) / f_derivada(Xo);
-         error = fabs(x1 - Xo);              
-         cout <<"| "<< Iter<<" | "<<setw(PRESICION)<<Xo<< " | " <<setw(PRESICION)<< f(Xo) << " | " <<setw(PRESICION)<< f_derivada(x1) <<  " | "<<setw(PRESICION)<< error << endl;
+         fx = f(Xo);
+         dfx = f_derivada(x1);
+         aux = fx- dfx;
+         error = fabs((x1 - Xo)/x1*100);              
+         cout <<"| "<<setw(5)<< Iter<<" | "<<setw(PRESICION)<<Xo<< " | " <<setw(PRESICION)<< fx << " | " <<setw(PRESICION)<< dfx <<  " | "<<setw(PRESICION)<<aux<<  " | "<<setw(PRESICION)<< error << endl;
             if (error <= tolerancia) {
                converge = true;
                break;            
