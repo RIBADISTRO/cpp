@@ -35,12 +35,10 @@ int main()
 	} while (ingresar == false && contador < 3);
 	cin.get();
 
-	if (ingresar == false)
-	{
+	if (ingresar == false){
 		cout << "Usted no pudeo ingresar....!" << endl;
 	}
-	else
-	{
+	else{
 		cout << "BIENVENIDO\n, Seccion iniciada" << endl;
 	}
 	return 0;

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#define PRESICION 6
+#define PRESICION 8
 using namespace std;
 
-double f(double x);
-double biseccion( double a,  double b, double tolerancia, int maxIteracion);
+double funcion_B(double x);
+void biseccion( double a,  double b, double tolerancia, int maxIteracion);
 int main(){
     cout<<"\n\t\e[36m=================================================\e[0m\n";
     cout<<"\t\e[36m=          METODO DE BISECCION                  =\e[0m\n";
@@ -21,7 +21,7 @@ int main(){
     return 0;
 }
 
- double biseccion( double a,  double b, double tolerancia, int maxIteracion){
+ void biseccion( double a,  double b, double tolerancia, int maxIteracion){
      double xr,xAntiguo,error;
      int iter=0;
 
@@ -35,27 +35,27 @@ int main(){
         error = fabs(double(xr-xAntiguo)/(xr)*100);
 
          /* IMPRIMIR LOS VALORES CALCULADOS  */
-         cout<<"|  "<<iter<<"\t| "<<setw(PRESICION)<< a <<"\t| "<<setw(PRESICION)<< b <<"\t| \e[95m"<<setw(PRESICION)<< xr <<"\e[0m\t| "<<setw(PRESICION)<< f(a) <<"\t| "<<setw(PRESICION)<< f(b) <<"\t| "<<setw(PRESICION)<< f(xr) <<"\t| "<<setw(PRESICION)<<error<<endl; 
+         cout<<"|  "<<iter<<"\t| "<<setw(PRESICION)<< a <<"\t| "<<setw(PRESICION)<< b <<"\t| \e[95m"<<setw(PRESICION)<< xr <<"\e[0m\t| "<<setw(PRESICION)<< funcion_B(a) <<"\t| "<<setw(PRESICION)<< funcion_B(b) <<"\t| "<<setw(PRESICION)<< funcion_B(xr) <<"\t| "<<setw(PRESICION)<<error<<endl; 
         /* CONDICION  */
-        if(abs(f(xr)) <= tolerancia){
+        if(abs(funcion_B(xr)) <= tolerancia){
             cout<<"\n\nPara la tolerancia \e[34m"<< tolerancia <<"\e[0m la raiz de f es: \e[93m"<< xr <<"\e[0m"<<endl;
             break;
         }else{
-            if(f(xr) * f(a) > 0){
+            if(funcion_B(xr) * funcion_B(a) > 0){
                 a = xr;
-            }else if(f(xr)* f(b) > 0){
+            }else if(funcion_B(xr)* funcion_B(b) > 0){
                 b = xr; 
             }
         }
 
         iter++;
         // return xr;
-     }while((abs(f(xr))>tolerancia) && (iter < maxIteracion));
+     }while((abs(funcion_B(xr))>tolerancia) && (iter < maxIteracion));
 
 }
 /**FUNCION 
  * Aqui se pueda reeplazar la funcion por otra
  */
-double f(double x){
+double funcion_B(double x){
     return cos(x)-x;
 }

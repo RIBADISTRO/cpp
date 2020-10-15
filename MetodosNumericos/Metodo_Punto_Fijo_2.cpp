@@ -4,11 +4,11 @@
 #define PRESICION 10
 using namespace std;
 
-double funcion(double fx);
-double g(double x);
-double puntoFijo(double Xo, double tolerancia, int maxIteracion);
+double funcion_PF(double fx);
+double derivada(double x);
+void puntoFijo(double Xo, double tolerancia, int maxIteracion);
 int main(){
-    float Xo, tolerancia;
+    double Xo, tolerancia;
     int maxIteracion;
     cout<<"\n\t\e[36m=================================================\e[0m\n";
     cout<<"\t\e[36m=          METODO DE PUNTO FIJO                 =\e[0m\n";
@@ -21,7 +21,7 @@ int main(){
     return 0;
 }   
 
-double puntoFijo(double Xo, double tolerancia, int maxIteracion){
+void puntoFijo(double Xo, double tolerancia, int maxIteracion){
     double Xn, error=1, fx, gx,aux,a;
     int iter=0;
     cout<<"| Iter      |    xi\t | g(x) \t    |   f(x)\t| Err"<<endl;
@@ -32,8 +32,8 @@ double puntoFijo(double Xo, double tolerancia, int maxIteracion){
           }else{
               error = fabs((Xo - aux)/Xo);
           }
-          fx = funcion(Xo);
-          gx = g(Xo);
+          fx = funcion_PF(Xo);
+          gx = derivada(Xo);
           cout<<"| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xo<<" | "<<setw(PRESICION)<<gx<<" | "<<setw(PRESICION)<<fx<<" | "<<setw(PRESICION)<<error<<endl;
           aux = Xo;
           Xo=gx;
@@ -45,10 +45,10 @@ double puntoFijo(double Xo, double tolerancia, int maxIteracion){
        }
 }
 
-double g(double x){
-  return cos(x);
-}
-double funcion(double fx){
+double funcion_PF(double fx){
     return cos(fx)-fx;//
+}
+double derivada(double x){
+  return cos(x);
 }
 
