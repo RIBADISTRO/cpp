@@ -4,8 +4,8 @@
 #define PRESICION 10
 using namespace std;
 
-double f(double x);    // Retorna el valor de la función evaluada en x
-double f_derivada(double x); // Retorna la derivada de la función evaluada en x
+double funcion(double x);    
+double f_derivada(double x); 
 void newton_raphson(double Xo, double tolerancia, int maxIteracion);    // Función que calcula la raiz aproximada de una función
 
 
@@ -25,50 +25,42 @@ int main(){
 }
 
 void newton_raphson(double Xo, double tolerancia, int maxIteracion){
-   double x1, error, fx,dfx, aux;    // Diferencia entre dos aproximaciones sucesivas: x1 - x0
-   int Iter = 1; // # de iteraciones
-   bool converge = true;
-   cout<<"\n| Iter  |    Xo\t     | f(x) \t  |  f'(x)\t| f(x)/f'(x) | Err"<<endl;
-   cout<<"---------------------------------------------------------------"<<endl;    
-   do {    
-      if (Iter > maxIteracion){
-         converge = false;
-         break;
-      }else{
-         x1 = Xo - f(Xo) / f_derivada(Xo);
-         fx = f(Xo);
-         dfx = f_derivada(x1);
-         aux = fx- dfx;
-         error = fabs((x1 - Xo)/x1*100);              
-         cout <<"| "<<setw(5)<< Iter<<" | "<<setw(PRESICION)<<Xo<< " | " <<setw(PRESICION)<< fx << " | " <<setw(PRESICION)<< dfx <<  " | "<<setw(PRESICION)<<aux<<  " | "<<setw(PRESICION)<< error << endl;
-            if (error <= tolerancia) {
-               converge = true;
-               break;            
-            }else{
-               Xo = x1;
-            }
-        }
-        Iter++;
-    
-    }while (Iter < maxIteracion);
-    
-    if (converge) {
-        cout << "\n\nPara una tolerancia de " << tolerancia << " la RAIZ APROXIMADA de f es = " << x1 << endl;
-    
-    } else {
-        cout << "\n\nSe sobrepasó la máxima cantidad de iteraciones permitidas" << endl;
+    double Xn, error=1, fx, dfx, converge;
+    int iter=0;
+    cout<<"\t| Iter      |    xi\t | f(x)\t           | f'(x)\t| Err"<<endl;
+    cout<<"\t---------------------------------------------------------------"<<endl;
+    // cout<<"\t| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xo<<" | "<<setw(PRESICION)<<funcion(Xo)<<" | "<<setw(PRESICION)<<f_derivada(Xo)<<endl;
+    while(iter <= maxIteracion){
+        if(iter>maxIteracion){
+            converge = false;
+            break;
+        }else{
+            fx= funcion(Xo);
+            dfx = f_derivada(Xo);
+            Xn = Xo- (fx/dfx);
+            error = fabs((Xn-Xo)/Xn);
+            cout<<"\t| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xn<<" | "<<setw(PRESICION)<<fx<<" | "<<setw(PRESICION)<<dfx<<" | "<<setw(PRESICION)<<error<<endl;
+        }if(error <= tolerancia){
+            converge = true;
+            break;
+        }else{
+            Xo = Xn;
+        }         
+        iter++;
     }
-}
+        if (converge) {
+            cout << "\n\tPara una tolerancia de " << tolerancia << " la RAIZ APROXIMADA de f es = " << Xn << endl;
+        
+        } else {
+            cout << "\n\tSe sobrepasó la máxima cantidad de iteraciones permitidas" << endl;
+        }
+}   
 
-double f(double x){
-   //  return x * exp(cos(x)) / 1.5 - 1;
-    //return exp(-x) + 3 * x - 3;
+double funcion(double x){
     return pow(exp(1),-x)-x;
 }
 
 
 double f_derivada(double x){
-   // return exp(cos(x)) * (1 - x * sin(x)) / 1.5;
-    //return -1 * exp(-x) + 3;
-    return -pow(exp(1),-x)-x;
+    return -pow(exp(1),-x)-1;
 }
