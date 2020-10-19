@@ -7,4 +7,5 @@ Programacion CPP
 ### -> Metodo de punto fijo 
 ### -> Metodo de Regla falsa 
 ### -> Metodo Newton Raphson
+### -> MNmain => Esta incluido en un menu todo los programas de metodos, pos si deseas revisar el codigo, solo clona el repositorio completo para ver la carpeta de metodos numericos
  
