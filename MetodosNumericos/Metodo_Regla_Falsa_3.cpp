@@ -31,13 +31,15 @@ void ReglaFalsa(double a, double b, double tolerancia, int maxIteracion){
         if(iter == 0){
             error = 1;
         }else{
+            
+            fa = f(a);
+            fb = f(b);
+            Xr = b-((fb*(a-b))/(fa-fb));
+            fXr = f(Xr);
             error = fabs((Xr-aux)/Xr);
+            cout<<"|  "<<iter<<"\t| "<<fixed<<setprecision(PRESICION)<< a <<"\t| "<<fixed<<setprecision(PRESICION)<< b <<"\t| \e[95m"<<fixed<<setprecision(PRESICION)<< Xr <<"\e[0m\t| "<<fixed<<setprecision(PRESICION)<< fa <<"\t| "<<fixed<<setprecision(PRESICION)<< fb <<"\t| "<<fixed<<setprecision(PRESICION)<< fXr <<"\t| "<<fixed<<setprecision(PRESICION)<<error<<endl; 
         }
-        fa = f(a);
-        fb = f(b);
-        Xr = b-((fb*(a-b))/(fa-fb));
-        fXr = f(Xr);
-        cout<<"|  "<<iter<<"\t| "<<fixed<<setprecision(PRESICION)<< a <<"\t| "<<fixed<<setprecision(PRESICION)<< b <<"\t| \e[95m"<<fixed<<setprecision(PRESICION)<< Xr <<"\e[0m\t| "<<fixed<<setprecision(PRESICION)<< fa <<"\t| "<<fixed<<setprecision(PRESICION)<< fb <<"\t| "<<fixed<<setprecision(PRESICION)<< fXr <<"\t| "<<fixed<<setprecision(PRESICION)<<error<<endl; 
+        
         if(fabs(f(Xr)) <= tolerancia){
             cout<<"\n\nPara la tolerancia \e[34m"<< tolerancia <<"\e[0m la raiz de f es: \e[93m"<< Xr <<"\e[0m"<<endl;
             break;

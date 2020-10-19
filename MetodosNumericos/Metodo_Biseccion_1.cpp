@@ -32,7 +32,7 @@ int main(){
      do{    
         xAntiguo =xr;
         xr= (a+b)/2;
-        error = fabs(double(xr-xAntiguo)/(xr)*100);
+        error = fabs((xr-xAntiguo)/(xr)*100);
 
          /* IMPRIMIR LOS VALORES CALCULADOS  */
          cout<<"|  "<<iter<<"\t| "<<setw(PRESICION)<< a <<"\t| "<<setw(PRESICION)<< b <<"\t| \e[95m"<<setw(PRESICION)<< xr <<"\e[0m\t| "<<setw(PRESICION)<< funcion_B(a) <<"\t| "<<setw(PRESICION)<< funcion_B(b) <<"\t| "<<setw(PRESICION)<< funcion_B(xr) <<"\t| "<<setw(PRESICION)<<error<<endl; 

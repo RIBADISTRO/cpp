@@ -6,7 +6,7 @@ using namespace std;
 
 double funcion(double x);    
 double f_derivada(double x); 
-void newton_raphson(double Xo, double tolerancia, int maxIteracion);    // Función que calcula la raiz aproximada de una función
+void newton_raphson(double Xo, double tolerancia, int maxIteracion);
 
 
 int main(){
@@ -26,10 +26,10 @@ int main(){
 
 void newton_raphson(double Xo, double tolerancia, int maxIteracion){
     double Xn, error=1, fx, dfx, converge;
-    int iter=0;
+    int iter=1;
     cout<<"\t| Iter      |    xi\t | f(x)\t           | f'(x)\t| Err"<<endl;
     cout<<"\t---------------------------------------------------------------"<<endl;
-    // cout<<"\t| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xo<<" | "<<setw(PRESICION)<<funcion(Xo)<<" | "<<setw(PRESICION)<<f_derivada(Xo)<<endl;
+    cout<<"\t| "<<setw(PRESICION)<<iter<<"| "<<setw(PRESICION)<<Xo<<" | "<<setw(PRESICION)<<funcion(Xo)<<" | "<<setw(PRESICION)<<f_derivada(Xo)<<" | "<<setw(PRESICION)<<" -- "<<endl;
     while(iter <= maxIteracion){
         if(iter>maxIteracion){
             converge = false;
